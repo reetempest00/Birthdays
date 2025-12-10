@@ -27,7 +27,7 @@
 
     // state
     let errorCount = 0;
-    const maxError = 1; // tampil error 3x
+    const maxError = 11; // tampil error 3x
     let dialogStep = 0;
     let autoPlay = true;
     let slideTimer = null;
@@ -277,5 +277,6 @@
             const p = new Image(); p.src = src;
         });
     });
+
 
 })();
