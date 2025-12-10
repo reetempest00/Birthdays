@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Suprise</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header class="site-header" id="header">
+        <div class="brand" style="text-align: center;">
+            <h1>Happy Borojol Day</h1>
+            <p class="subtitle"></p>
+        </div>
+    </header>
+
+    <div class="app" id="app">
+        <!-- SCENE 1: ERROR PRANK -->
+        <section id="scene-error" class="scene visible" aria-live="polite">
+            <div style="text-align:center; max-width:700px;">
+                <p class="lead">Tap to open your little surprise</p>
+            </div>
+
+            <div id="notice" role="status" aria-atomic="true"></div>
+
+            <div style="margin-top:12px;">
+                <button id="triggerBtn" class="btn">Klik</button>
+            </div>
+
+            <p id="motivasi"
+                style="display: none; text-align: center; color:var(--muted); font-size:0.9rem; margin-top:12px;">
+                Ganbatte 💪
+            </p>
+        </section>
+
+        <!-- SCENE 2: GIFT DIALOGS -->
+        <section id="scene-gift" class="scene hidden" aria-hidden="true">
+            <div class="gift-stage" aria-hidden="true" style="margin-top:10px;">
+                <div id="gift" class="gift" aria-hidden="true">
+                    <div id="dialog" class="dialog" role="status" aria-live="polite"></div>
+
+                    <!-- visual gift box -->
+                    <div class="gift-card" id="giftCard" aria-hidden="true" title="Klik untuk buka">
+                        <div class="box">
+                            <div class="lid"></div>
+                            <div class="body"></div>
+                            <div class="ribbon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="emoji" class="emoji" aria-hidden="true">🥳</div>
+            <div id="emojiBubble" class="dialog" style="--tmp:1" aria-hidden="true"></div>
+        </section>
+
+        <!-- SCENE 4: SLIDESHOW (after explosion) -->
+        <section id="scene-slideshow" class="scene hidden" aria-hidden="true">
+            <div style="text-align:center;">
+                <div class="title">Barakallah, wilujeng milad ✨</div>
+                <p class="lead"></p>
+            </div>
+
+            <div id="slideshow" class="slideshow" style="margin-top:12px;">
+                <div class="slides" id="slides">
+                    <!-- Ganti src sesuai folder asset/images kamu -->
+                    <img class="slide" src="../asset/images/AE86.jpg" alt="Foto 1">
+                    <img class="slide" src="../asset/images/RX-7 FD.jpg" alt="Foto 2">
+                    <img class="slide" src="../asset/images/R32W.jpg" alt="Foto 3">
+                    <img class="slide" src="../asset/images/Devilz.jpg" alt="Foto 4">
+                    <img class="slide" src="../asset/images/blackbird.jpg" alt="Foto 5">
+                </div>
+
+                <div class="controls-row">
+                    <div class="dots" id="dots"></div>
+                    <div style="flex:1"></div>
+                </div>
+                <div class="controls-row">
+                    <button id="prevBtn" class="btn">Prev</button>
+                    <button id="playPause" class="btn">Pause</button>
+                    <button id="nextBtn" class="btn">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- confetti container (global) -->
+        <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+    </div>
+
+    <audio id="bgm" loop preload="auto" src="asset/sound/bgjs.mp3"></audio>
+    <audio id="boom" src="asset/sound/pp.mp3"></audio>
+
+    <script src="script.js"></script>
+
+    <footer class="brand" id="footer">
+        <p>© 2025 - ReeTempest</p>
+    </footer>
+</body>
+
+</html>

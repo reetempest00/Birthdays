@@ -1,0 +1,388 @@
+ :root {
+     --bg: #0b0e10;
+     --muted: #b9d6dd;
+     --neon: #00f0ff;
+     --accent: #00c4ff;
+     --glass: rgba(255, 255, 255, 0.02);
+     --transition: 320ms;
+     --max-width: 1100px;
+ }
+
+ /* base */
+ * {
+     box-sizing: border-box
+ }
+
+ html,
+ body {
+     height: 100%
+ }
+
+ body {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: flex-start;
+     margin: 0%;
+     font-family: Inter, system-ui, Arial, sans-serif;
+     background: linear-gradient(180deg, #2e343bc5 0%, #000000 99.99%);
+     color: #eaf6f8;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     align-items: center;
+     justify-content: center;
+     padding: 0%;
+ }
+
+ .app {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     max-width: var(--max-width);
+     min-height: 73vh;
+     border-radius: 15px;
+     background: transparent;
+     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+     position: relative;
+     overflow: hidden;
+ }
+
+ /* section (full-screen style inside app) */
+ .scene {
+     position: absolute;
+     inset: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     gap: 5px;
+     padding: 5px;
+     transition: opacity var(--transition) ease, transform var(--transition) ease;
+ }
+
+ .scene.hidden {
+     opacity: 0;
+     pointer-events: none;
+     transform: translateY(8px);
+ }
+
+ .scene.visible {
+     opacity: 1;
+     pointer-events: auto;
+     transform: translateY(0);
+ }
+
+ /* Header inside app */
+ .title {
+     font-size: 1.6rem;
+     letter-spacing: 0.2px;
+     color: var(--neon);
+     text-shadow: 0 6px 26px rgba(0, 240, 255, 0.04);
+ }
+
+ .lead {
+     color: var(--muted);
+     margin: 5%;
+ }
+
+ /* buttons */
+ .btn {
+     background: linear-gradient(90deg, rgba(0, 240, 255, 0.04), rgba(0, 196, 255, 0.02));
+     border: 1px solid rgba(0, 240, 255, 0.12);
+     color: var(--neon);
+     padding: 10px 16px;
+     border-radius: 10px;
+     cursor: pointer;
+     font-weight: 700;
+     transition: transform 180ms ease, box-shadow 220ms ease, opacity 220ms ease;
+     backdrop-filter: blur(4px);
+ }
+
+ .btn:active {
+     transform: translateY(1px) scale(.995)
+ }
+
+ .btn[disabled] {
+     opacity: .45;
+     cursor: not-allowed;
+     transform: none
+ }
+
+ /* notice (error) */
+ #notice {
+     background: #2b0a0a;
+     color: #ffd6d6;
+     padding: 10px 14px;
+     border-radius: 10px;
+     border: 1px solid rgba(255, 120, 120, 0.12);
+     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+     max-width: 640px;
+     text-align: center;
+     transition: transform 220ms ease, opacity 220ms ease;
+     opacity: 0;
+     pointer-events: none;
+ }
+
+ #notice.show {
+     opacity: 1;
+     pointer-events: auto;
+ }
+
+ @keyframes shake {
+     10% {
+         transform: translateX(-6px)
+     }
+
+     30% {
+         transform: translateX(6px)
+     }
+
+     50% {
+         transform: translateX(-4px)
+     }
+
+     70% {
+         transform: translateX(4px)
+     }
+
+     90% {
+         transform: translateX(-2px)
+     }
+ }
+
+ /* GIFT stage */
+ .gift-stage {
+     position: relative;
+     width: 100%;
+     max-width: 800px;
+     height: 320px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     overflow: hidden;
+     /* biar perpindahan off-screen rapi */
+ }
+
+ /* POSISI DASAR GIFTS – SELALU PATOKAN TENGAH */
+ .gift {
+     position: absolute;
+     left: 51%;
+     transform: translateX(-200%);
+     /* start jauh dari kiri */
+     transition: transform 700ms cubic-bezier(.2, .9, .2, 1);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 20px;
+ }
+
+ /* STEP 2 – muncul 30% dari kiri layar */
+ .gift.step-2 {
+     transform: translateX(-135%);
+ }
+
+ /* STEP 3 – muncul dekat tengah */
+ .gift.step-3 {
+     transform: translateX(-95%);
+ }
+
+ /* STEP 4 – posisi final di tengah */
+ .gift.in-place {
+     transform: translateX(-51%);
+ }
+
+ /* gift box (simple CSS) */
+ .gift-card {
+     width: 140px;
+     height: 110px;
+     position: relative;
+     cursor: pointer;
+ }
+
+ .box {
+     width: 120px;
+     height: 80px;
+     position: relative;
+     margin-top: 6px;
+ }
+
+ .box .body {
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     height: 60px;
+     background: linear-gradient(180deg, #082426, #021616);
+     border-radius: 6px;
+     box-shadow: inset 0 8px 26px rgba(0, 0, 0, 0.6);
+ }
+
+ .box .lid {
+     position: absolute;
+     left: -6px;
+     right: -6px;
+     top: -12px;
+     height: 36px;
+     background: linear-gradient(90deg, var(--neon), var(--accent));
+     border-radius: 8px;
+     transform-origin: center;
+     transition: transform 360ms cubic-bezier(.2, .9, .2, 1);
+ }
+
+ .box .ribbon {
+     position: absolute;
+     left: calc(50% - 8px);
+     top: 6px;
+     width: 16px;
+     height: 46px;
+     background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.18));
+     border-radius: 8px;
+ }
+
+ .open-lid {
+     transform: rotateX(55deg) translateY(-8px);
+ }
+
+ /* dialog */
+ .dialog {
+     background: #071213;
+     color: var(--neon);
+     padding: 8px 12px;
+     border-radius: 12px;
+     border: 1px solid rgba(0, 240, 255, 0.06);
+     box-shadow: 0 8px 30px rgba(0, 240, 255, 0.03);
+     font-weight: 600;
+     opacity: 0;
+     transform: translateY(6px);
+     transition: opacity 260ms ease, transform 260ms ease;
+ }
+
+ .dialog.show {
+     opacity: 1;
+     transform: translateY(0);
+ }
+
+ .gift-img {
+     width: 120px;
+     height: 120px;
+     object-fit: cover;
+     border-radius: 10px;
+     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+ }
+
+ /* emoji bubble */
+ .emoji {
+     font-size: 42px;
+     transform: scale(0.85);
+     opacity: 0;
+     transition: transform 220ms ease, opacity 220ms ease;
+ }
+
+ .emoji.show {
+     opacity: 1;
+     transform: scale(1);
+ }
+
+ .emoji.bounce {
+     animation: emoji-bounce 700ms both;
+ }
+
+ @keyframes emoji-bounce {
+     0% {
+         transform: translateY(-6px) scale(.9)
+     }
+
+     50% {
+         transform: translateY(-2px) scale(1.06)
+     }
+
+     100% {
+         transform: translateY(0) scale(1)
+     }
+ }
+
+ /* confetti layer */
+ .confetti-layer {
+     position: absolute;
+     inset: 0;
+     pointer-events: none;
+     overflow: hidden;
+     z-index: 40;
+ }
+
+ /* slideshow */
+ .slideshow {
+     width: 100%;
+     max-width: 675px;
+     background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
+     border-radius: 12px;
+     padding: 5px;
+     display: flex;
+     gap: 10px;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+ }
+
+ .slides {
+     width: 100%;
+     height: 300px;
+     position: relative;
+     overflow: hidden;
+     border-radius: 8px;
+ }
+
+ .slides img {
+     position: absolute;
+     inset: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     opacity: 0;
+     transition: opacity 420ms ease;
+ }
+
+ .slides img.active {
+     opacity: 1;
+ }
+
+ .controls-row {
+     display: flex;
+     gap: 8px;
+     align-items: center;
+ }
+
+ .dots {
+     display: flex;
+     gap: 8px;
+ }
+
+ .dots button {
+     width: 10px;
+     height: 10px;
+     border-radius: 50%;
+     border: 1px solid rgba(255, 255, 255, 0.06);
+     background: transparent;
+     cursor: pointer;
+ }
+
+ .dots button.active {
+     background: var(--neon);
+     box-shadow: 0 6px 20px rgba(0, 240, 255, 0.06);
+ }
+
+ /* small responsive */
+ @media (max-width:720px) {
+     .app {
+         padding: 16px
+     }
+
+     .gift-stage {
+         height: 240px
+     }
+
+     .slides {
+         height: 220px
+     }
+ }
